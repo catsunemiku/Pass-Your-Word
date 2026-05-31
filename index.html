@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<title>Pass Your Word v1.01</title>
+</head>
+<body>
+
+<h2>Pass your word</h2>
+
+Length:
+<input id="length" type="number" value="16">
+
+<br><br>
+
+<label>
+<input type="checkbox" id="numbers" checked>
+Numbers
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" id="symbols" checked>
+Symbols
+</label>
+
+<br><br>
+
+<button onclick="generate()">Generate</button>
+
+<p>Result:</p>
+<div id="out"></div>
+
+<br>
+
+<button onclick="copy()">Copy</button>
+
+<script>
+function rand(max) {
+  return crypto.getRandomValues(new Uint32Array(1))[0] % max;
+}
+
+function generate() {
+  var len = document.getElementById("length").value;
+
+  if (len > 256) {
+    alert("calm down");
+    len = 256;
+  }
+
+  var lower = "abcdefghijklmnopqrstuvwxyz";
+  var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var nums = "0123456789";
+  var syms = "!@#$%^&*()-_=+[]{};:,.<>?/";
+
+  var chars = lower + upper;
+
+  if (document.getElementById("numbers").checked) {
+    chars += nums;
+  }
+
+  if (document.getElementById("symbols").checked) {
+    chars += syms;
+  }
+
+  var pass = "";
+
+  for (var i = 0; i < len; i++) {
+    pass += chars[rand(chars.length)];
+  }
+
+  document.getElementById("out").innerText = pass;
+}
+
+function copy() {
+  var text = document.getElementById("out").innerText;
+  navigator.clipboard.writeText(text);
+  alert("copied");
+}
+</script>
+
+</body>
+</html>
