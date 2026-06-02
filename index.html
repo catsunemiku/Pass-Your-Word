@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>Pass Your Word v1.02</title>
+<title>Pass Your Word v1.04</title>
 </head>
 <body>
 
@@ -48,10 +48,11 @@ function generate() {
     len = 256;
   }
 
- if (len == 69) {
+ if (len === 69) {
     alert("you're so immature");
     len = 68;
-  }
+    document.getElementById("length").value = 68;
+}
 
   var lower = "abcdefghijklmnopqrstuvwxyz";
   var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
